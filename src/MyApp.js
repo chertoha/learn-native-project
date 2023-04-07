@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,10 +6,25 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
+import { LoginScreen } from "./Screens/LoginScreen/LoginScreen";
 import { RegistrationScreen } from "./Screens/RegistrationScreen/RegistrationScreen";
 
 export default function MyApp() {
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  // console.log(isKeyboardOpen);
+
+  const closeKeyboard = () => {
+    setIsKeyboardOpen(false);
+    Keyboard.dismiss();
+  };
+
+  const onInputFocusHandler = () => {
+    setIsKeyboardOpen(true);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -19,7 +34,24 @@ export default function MyApp() {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <RegistrationScreen />
+          <TouchableWithoutFeedback onPress={closeKeyboard}>
+            <ScrollView
+              keyboardShouldPersistTaps="handled"
+              keyboardDismissMode="on-drag"
+            >
+              <RegistrationScreen
+                onInputFocus={onInputFocusHandler}
+                isKeyboardOpen={isKeyboardOpen}
+                closeKeyboard={closeKeyboard}
+              />
+
+              {/* <LoginScreen
+                onInputFocus={onInputFocusHandler}
+                isKeyboardOpen={isKeyboardOpen}
+                closeKeyboard={closeKeyboard}
+              /> */}
+            </ScrollView>
+          </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </ImageBackground>
     </View>
@@ -34,7 +66,7 @@ const styles = StyleSheet.create({
 
   bgdImage: {
     // paddingTop: 212,
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     resizeMode: "cover",
   },

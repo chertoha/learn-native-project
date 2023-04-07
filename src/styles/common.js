@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export const commonStyles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 212,
     // marginTop: 212,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,

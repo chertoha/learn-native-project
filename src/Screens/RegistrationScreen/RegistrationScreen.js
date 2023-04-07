@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -7,82 +8,87 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
+import { EmailField } from "../../components/EmailField";
+import { FormLogRegLink } from "../../components/FormLogRegLink";
+import { FormSubmitButton } from "../../components/FormSubmitButton";
+import { PasswordField } from "../../components/PasswordField";
+import { TextInputField } from "../../components/TextInputField";
 import { commonStyles } from "../../styles/common";
 
-export const RegistrationScreen = () => {
+const initialState = {
+  login: "",
+  email: "",
+  password: "",
+};
+
+export const RegistrationScreen = ({
+  onInputFocus,
+  isKeyboardOpen,
+  closeKeyboard,
+}) => {
+  // const [state, setState] = useState(initialState);
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const clearFields = () => {
+    setLogin("");
+    setEmail("");
+    setPassword("");
+  };
+
+  const onSubmitHandler = () => {
+    const values = { login, email, password };
+    console.log(values);
+    closeKeyboard();
+    clearFields();
+  };
+
   return (
-    <ScrollView>
-      <View style={commonStyles.container}>
-        <View style={commonStyles.formWrapper}>
-          <Text style={commonStyles.title}>Регистрация</Text>
+    <View
+      style={{
+        ...commonStyles.container,
+        marginTop: isKeyboardOpen ? 43 : 219,
+      }}
+    >
+      <View style={commonStyles.formWrapper}>
+        <Text style={commonStyles.title}>Регистрация</Text>
 
-          <View style={commonStyles.fieldsWrapper}>
-            <TextInput style={commonStyles.field} placeholder="Логин" />
-            <TextInput
-              style={commonStyles.field}
-              placeholder="Адрес электронной почты"
-            />
-            <TextInput
-              style={commonStyles.field}
-              placeholder="Пароль"
-              secureTextEntry={true}
-            />
-          </View>
+        <View style={commonStyles.fieldsWrapper}>
+          <TextInputField
+            placeholder="Логин"
+            onFocus={onInputFocus}
+            value={login}
+            onChangeText={setLogin}
+          />
 
-          <TouchableOpacity style={commonStyles.button} activeOpacity={0.7}>
-            <Text style={commonStyles.buttonText}>Зарегистрироваться</Text>
-          </TouchableOpacity>
+          <EmailField
+            value={email}
+            onChangeText={setEmail}
+            onFocus={onInputFocus}
+          />
 
-          <TouchableOpacity style={commonStyles.logRegLink}>
-            <Text style={commonStyles.logRegLinkText}>
-              Уже есть аккаунт? Войти
-            </Text>
-          </TouchableOpacity>
+          <PasswordField
+            value={password}
+            onChangeText={setPassword}
+            onFocus={onInputFocus}
+          />
         </View>
+
+        <FormSubmitButton
+          title="Зарегистрироваться"
+          onPress={onSubmitHandler}
+        />
+
+        <FormLogRegLink>Уже есть аккаунт? Войти</FormLogRegLink>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 // const styles = StyleSheet.extend(commonStyles, {});
 
-const styles = StyleSheet.create({
-  //   container: {
-  //     flex: 1,
-  //     marginTop: 212,
-  //     // width: 200,
-  //     // backgroundColor: "grey",
-  //     // color: "#fff",
-  //     borderTopLeftRadius: 25,
-  //     borderTopRightRadius: 25,
-  //     backgroundColor: "#fff",
-  //   },
-  //   formWrapper: {
-  //     flex: 1,
-  //     marginHorizontal: 16,
-  //   },
-  //   title: {
-  //     marginTop: 92,
-  //     color: "#212121",
-  //     fontWeight: "500",
-  //     fontSize: 30,
-  //     lineHeight: 1.167,
-  //     letterSpacing: 0.01,
-  //   },r
-  //   fieldsWrapper: {
-  //     marginTop: 32,
-  //     rowGap: 16,
-  //   },
-  //   field: {
-  //     height: 50,
-  //     color: "#BDBDBD",
-  //     fontWeight: "400",
-  //     fontSize: 16,
-  //     lineHeight: 1.188,
-  //     backgroundColor: "#F6F6F6",
-  //     borderRadius: 8,
-  //   },
-});
+// const styles = StyleSheet.create({});
 
 // const container = StyleSheet.compose(commonStyles.container, styles.container);
 
