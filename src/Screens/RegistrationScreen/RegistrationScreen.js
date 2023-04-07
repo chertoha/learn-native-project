@@ -1,25 +1,12 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { EmailField } from "../../components/EmailField";
 import { FormLogRegLink } from "../../components/FormLogRegLink";
 import { FormSubmitButton } from "../../components/FormSubmitButton";
 import { PasswordField } from "../../components/PasswordField";
 import { TextInputField } from "../../components/TextInputField";
 import { commonStyles } from "../../styles/common";
-
-const initialState = {
-  login: "",
-  email: "",
-  password: "",
-};
+import Icon from "react-native-vector-icons/AntDesign";
 
 export const RegistrationScreen = ({
   onInputFocus,
@@ -48,9 +35,16 @@ export const RegistrationScreen = ({
     <View
       style={{
         ...commonStyles.container,
+        ...styles.container,
         marginTop: isKeyboardOpen ? 43 : 219,
       }}
     >
+      <View style={styles.imageBox}>
+        <View style={styles.iconWrapper}>
+          <Icon name="plus" size={16} color="#FF6C00" />
+        </View>
+      </View>
+
       <View style={commonStyles.formWrapper}>
         <Text style={commonStyles.title}>Регистрация</Text>
 
@@ -86,10 +80,42 @@ export const RegistrationScreen = ({
   );
 };
 
-// const styles = StyleSheet.extend(commonStyles, {});
+const styles = StyleSheet.create({
+  container: {
+    position: "relative",
+    // backgroundColor: "red",
+  },
 
-// const styles = StyleSheet.create({});
+  imageBox: {
+    position: "absolute",
+    top: -60,
+    left: "50%",
+    transform: [{ translateX: -60 }, { translateY: 0 }],
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+  },
 
-// const container = StyleSheet.compose(commonStyles.container, styles.container);
+  iconWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    bottom: 14,
+    right: -12,
+    width: 25,
+    height: 25,
+    zIndex: 999,
+    color: "black",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#FF6C00",
+    borderRadius: 50,
+    overflow: "hidden",
+  },
+});
 
-// const styles = StyleSheet.compose(commonStyles, registerStyles);
+// const registerContainer = StyleSheet.compose(
+//   commonStyles.container,
+//   styles.container
+// );

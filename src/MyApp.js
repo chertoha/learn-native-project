@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -24,6 +24,17 @@ export default function MyApp() {
   const onInputFocusHandler = () => {
     setIsKeyboardOpen(true);
   };
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidHide", () => {
+      setIsKeyboardOpen(false);
+      // Keyboard.dismiss();
+    });
+
+    return () => {
+      Keyboard.removeAllListeners("keyboardDidHide");
+    };
+  });
 
   return (
     <View style={styles.container}>
