@@ -76,17 +76,17 @@ export default function MyApp() {
               keyboardShouldPersistTaps="handled"
               keyboardDismissMode="on-drag"
             >
-              {/* <RegistrationScreen
-                onInputFocus={onInputFocusHandler}
-                isKeyboardOpen={isKeyboardOpen}
-                closeKeyboard={closeKeyboard}
-              /> */}
-
-              <LoginScreen
+              <RegistrationScreen
                 onInputFocus={onInputFocusHandler}
                 isKeyboardOpen={isKeyboardOpen}
                 closeKeyboard={closeKeyboard}
               />
+
+              {/* <LoginScreen
+                onInputFocus={onInputFocusHandler}
+                isKeyboardOpen={isKeyboardOpen}
+                closeKeyboard={closeKeyboard}
+              /> */}
             </ScrollView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
