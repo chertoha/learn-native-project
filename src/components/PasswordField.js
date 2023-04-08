@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   },
 
   btnText: {
+    fontFamily: "Roboto-Regular",
     color: "#1B4371",
     fontWeight: 400,
     lineHeight: 19,

@@ -16,6 +16,7 @@ export const commonStyles = StyleSheet.create({
   },
 
   title: {
+    fontFamily: "Roboto-Medium",
     marginTop: 92,
     textAlign: "center",
     color: "#212121",
@@ -31,10 +32,11 @@ export const commonStyles = StyleSheet.create({
   },
 
   field: {
+    fontFamily: "Roboto-Regular",
     height: 50,
     paddingHorizontal: 16,
     color: "#BDBDBD",
-    fontWeight: "400",
+    // fontWeight: 400,
     fontSize: 16,
     lineHeight: 20,
     backgroundColor: "#F6F6F6",
@@ -53,17 +55,19 @@ export const commonStyles = StyleSheet.create({
   },
 
   buttonText: {
+    fontFamily: "Roboto-Regular",
     color: "#fff",
   },
 
   logRegLink: {
     height: 50,
-    marginBottom: 45,
+    marginBottom: 55,
     alignItems: "center",
     justifyContent: "center",
   },
 
   logRegLinkText: {
+    fontFamily: "Roboto-Regular",
     color: "#1B4371",
     fontWeight: 400,
     fontSize: 16,

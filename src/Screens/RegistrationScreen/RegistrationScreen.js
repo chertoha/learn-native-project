@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { EmailField } from "../../components/EmailField";
 import { FormLogRegLink } from "../../components/FormLogRegLink";
 import { FormSubmitButton } from "../../components/FormSubmitButton";
@@ -7,16 +7,36 @@ import { PasswordField } from "../../components/PasswordField";
 import { TextInputField } from "../../components/TextInputField";
 import { commonStyles } from "../../styles/common";
 import Icon from "react-native-vector-icons/AntDesign";
+import * as ImagePicker from "expo-image-picker";
 
 export const RegistrationScreen = ({
   onInputFocus,
   isKeyboardOpen,
   closeKeyboard,
 }) => {
-  // const [state, setState] = useState(initialState);
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //IMAGE PICKER
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+  //IMAGE PICKER
 
   const clearFields = () => {
     setLogin("");
@@ -40,9 +60,34 @@ export const RegistrationScreen = ({
       }}
     >
       <View style={styles.imageBox}>
-        <View style={styles.iconWrapper}>
-          <Icon name="plus" size={16} color="#FF6C00" />
-        </View>
+        {image && (
+          <Image
+            source={{ uri: image }}
+            style={{ width: 120, height: 120, borderRadius: 16 }}
+          />
+        )}
+
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={{
+            ...styles.iconWrapper,
+            borderColor: image ? "#E8E8E8" : "#FF6C00",
+          }}
+          onPress={
+            image
+              ? () => {
+                  setImage(null);
+                }
+              : pickImage
+          }
+        >
+          <Icon
+            name="plus"
+            size={16}
+            color={image ? "#E8E8E8" : "#FF6C00"}
+            style={image && { transform: [{ rotate: "45deg" }] }}
+          />
+        </TouchableOpacity>
       </View>
 
       <View style={commonStyles.formWrapper}>
@@ -88,9 +133,11 @@ const styles = StyleSheet.create({
 
   imageBox: {
     position: "absolute",
+    // overflow: "hidden",
     top: -60,
     left: "50%",
     transform: [{ translateX: -60 }, { translateY: 0 }],
+    zIndex: 1,
     width: 120,
     height: 120,
     backgroundColor: "#F6F6F6",

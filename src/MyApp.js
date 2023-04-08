@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -11,10 +12,31 @@ import {
 } from "react-native";
 import { LoginScreen } from "./Screens/LoginScreen/LoginScreen";
 import { RegistrationScreen } from "./Screens/RegistrationScreen/RegistrationScreen";
+import * as Font from "expo-font";
+import { loadAsync } from "expo-font";
+// import { AppLoading } from "expo";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function MyApp() {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-  // console.log(isKeyboardOpen);
+
+  const [fontsLoaded] = useFonts({
+    "Roboto-Regular": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("./assets/fonts/Roboto/Roboto-Medium.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      try {
+        await SplashScreen.hideAsync();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [fontsLoaded]);
 
   const closeKeyboard = () => {
     setIsKeyboardOpen(false);
@@ -31,15 +53,19 @@ export default function MyApp() {
       // Keyboard.dismiss();
     });
 
-    return () => {
-      Keyboard.removeAllListeners("keyboardDidHide");
-    };
-  });
+    // return () => {
+    //   Keyboard.removeAllListeners("keyboardDidHide");
+    // };
+  }, []);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <ImageBackground
-        source={require("../assets/bgd-image.jpg")}
+        source={require("./assets/images/bgd-image.jpg")}
         style={styles.bgdImage}
       >
         <KeyboardAvoidingView
