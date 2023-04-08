@@ -161,8 +161,3 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
 });
-
-// const registerContainer = StyleSheet.compose(
-//   commonStyles.container,
-//   styles.container
-// );

@@ -48,7 +48,7 @@ export const LoginScreen = ({
       }}
     >
       <View style={commonStyles.formWrapper}>
-        <Text style={commonStyles.title}>Войти</Text>
+        <Text style={title}>Войти</Text>
 
         <View style={commonStyles.fieldsWrapper}>
           <EmailField
@@ -71,3 +71,11 @@ export const LoginScreen = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    marginTop: 32,
+  },
+});
+
+const title = StyleSheet.compose(commonStyles.title, styles.title);
