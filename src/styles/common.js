@@ -36,7 +36,7 @@ export const commonStyles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 16,
     color: "#BDBDBD",
-    // fontWeight: 400,
+    fontWeight: "400",
     fontSize: 16,
     lineHeight: 20,
     backgroundColor: "#F6F6F6",
@@ -69,7 +69,7 @@ export const commonStyles = StyleSheet.create({
   logRegLinkText: {
     fontFamily: "Roboto-Regular",
     color: "#1B4371",
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 16,
     lineHeight: 20,
   },

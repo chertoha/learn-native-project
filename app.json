@@ -1,5 +1,6 @@
 {
   "expo": {
+    "main": "node_modules/expo/AppEntry.js",
     "jsEngine": "hermes",
     "name": "learn-native-project",
     "slug": "learn-native-project",
@@ -18,6 +19,7 @@
       "supportsTablet": true
     },
     "android": {
+      "jsEngine": "jsc",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
