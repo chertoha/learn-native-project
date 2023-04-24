@@ -18,9 +18,9 @@ export const useKeyboardForm = () => {
       setIsKeyboardOpen(false);
     });
 
-    return () => {
-      Keyboard.removeAllListeners("keyboardDidHide");
-    };
+    // return () => {
+    //   Keyboard.removeAllListeners("keyboardDidHide");
+    // };
   }, []);
 
   return { onInputFocus, isKeyboardOpen, closeKeyboard };
