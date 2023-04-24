@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { EmailField } from "./EmailField";
 import { FormLogRegLink } from "./FormLogRegLink";
 import { FormSubmitButton } from "./FormSubmitButton";
