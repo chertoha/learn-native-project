@@ -8,12 +8,17 @@ import { TextInputField } from "../../components/TextInputField";
 import { commonStyles } from "../../styles/common";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
+import { useKeyboardForm } from "../../hooks/useKeyboardForm";
 
-export const RegistrationScreen = ({
-  onInputFocus,
-  isKeyboardOpen,
-  closeKeyboard,
-}) => {
+export const RegistrationScreen = (
+  {
+    // onInputFocus,
+    // isKeyboardOpen,
+    // closeKeyboard,
+  }
+) => {
+  const { closeKeyboard, isKeyboardOpen, onInputFocus } = useKeyboardForm();
+
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

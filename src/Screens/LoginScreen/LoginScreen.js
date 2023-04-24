@@ -12,19 +12,23 @@ import { EmailField } from "../../components/EmailField";
 import { FormLogRegLink } from "../../components/FormLogRegLink";
 import { FormSubmitButton } from "../../components/FormSubmitButton";
 import { PasswordField } from "../../components/PasswordField";
+import { useKeyboardForm } from "../../hooks/useKeyboardForm";
 import { commonStyles } from "../../styles/common";
 
-const initialState = {
-  email: "",
-  password: "",
-};
+// const initialState = {
+//   email: "",
+//   password: "",
+// };
 
-export const LoginScreen = ({
-  onInputFocus,
-  isKeyboardOpen,
-  closeKeyboard,
-}) => {
+export const LoginScreen = (
+  {
+    // onInputFocus,
+    // isKeyboardOpen,
+    // closeKeyboard,
+  }
+) => {
   // const [state, setState] = useState(initialState);
+  const { closeKeyboard, isKeyboardOpen, onInputFocus } = useKeyboardForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

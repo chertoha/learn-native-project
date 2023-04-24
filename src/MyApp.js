@@ -9,26 +9,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { useKeyboardForm } from "./hooks/useKeyboardForm";
 import { LoginScreen } from "./Screens/LoginScreen/LoginScreen";
 import { RegistrationScreen } from "./Screens/RegistrationScreen/RegistrationScreen";
 
 export default function MyApp() {
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-
-  const closeKeyboard = () => {
-    setIsKeyboardOpen(false);
-    Keyboard.dismiss();
-  };
-
-  const onInputFocusHandler = () => {
-    setIsKeyboardOpen(true);
-  };
-
-  useEffect(() => {
-    Keyboard.addListener("keyboardDidHide", () => {
-      setIsKeyboardOpen(false);
-    });
-  }, []);
+  const { closeKeyboard, isKeyboardOpen, onInputFocus } = useKeyboardForm();
 
   return (
     <View style={styles.container}>
@@ -45,16 +31,12 @@ export default function MyApp() {
               keyboardDismissMode="on-drag"
             >
               <RegistrationScreen
-                onInputFocus={onInputFocusHandler}
+                onInputFocus={onInputFocus}
                 isKeyboardOpen={isKeyboardOpen}
                 closeKeyboard={closeKeyboard}
               />
-              {/* 
-              <LoginScreen
-                onInputFocus={onInputFocusHandler}
-                isKeyboardOpen={isKeyboardOpen}
-                closeKeyboard={closeKeyboard}
-              /> */}
+
+              {/* <LoginScreen /> */}
             </ScrollView>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
