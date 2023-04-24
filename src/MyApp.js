@@ -12,9 +12,7 @@ import {
 } from "react-native";
 import { LoginScreen } from "./Screens/LoginScreen/LoginScreen";
 import { RegistrationScreen } from "./Screens/RegistrationScreen/RegistrationScreen";
-// import * as Font from "expo-font";
-// import { loadAsync } from "expo-font";
-// import { AppLoading } from "expo";
+
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
