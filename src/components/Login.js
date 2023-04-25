@@ -5,8 +5,12 @@ import { FormLogRegLink } from "./FormLogRegLink";
 import { FormSubmitButton } from "./FormSubmitButton";
 import { PasswordField } from "./PasswordField";
 import { commonStyles } from "../styles/common";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../MyApp";
 
 export const Login = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -48,7 +52,13 @@ export const Login = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
 
         <FormSubmitButton title="Войти" onPress={onSubmitHandler} />
 
-        <FormLogRegLink>Нет аккаунта? Зарегистрироваться</FormLogRegLink>
+        <FormLogRegLink
+          onPress={() => {
+            navigation.navigate(SCREENS.REGISTRATION);
+          }}
+        >
+          Нет аккаунта? Зарегистрироваться
+        </FormLogRegLink>
       </View>
     </View>
   );

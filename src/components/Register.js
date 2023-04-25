@@ -8,8 +8,12 @@ import { TextInputField } from "./TextInputField";
 import { commonStyles } from "../styles/common";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../MyApp";
 
 export const Register = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
+  const navigation = useNavigation();
+
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -115,7 +119,13 @@ export const Register = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
           onPress={onSubmitHandler}
         />
 
-        <FormLogRegLink>Уже есть аккаунт? Войти</FormLogRegLink>
+        <FormLogRegLink
+          onPress={() => {
+            navigation.navigate(SCREENS.LOGIN);
+          }}
+        >
+          Уже есть аккаунт? Войти
+        </FormLogRegLink>
       </View>
     </View>
   );
