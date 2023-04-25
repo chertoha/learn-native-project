@@ -10,9 +10,12 @@ import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../router/router.constants";
+import { setAuth } from "../redux/auth/slice";
+import { useDispatch } from "react-redux";
 
 export const Register = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
@@ -49,6 +52,8 @@ export const Register = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
     console.log(values);
     closeKeyboard();
     clearFields();
+
+    dispatch(setAuth(true));
   };
 
   return (

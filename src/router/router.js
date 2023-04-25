@@ -11,8 +11,8 @@ import { CommentsScreen } from "../screens/CommentsScreen";
 import { ProfileScreen } from "../screens/ProfileScreen";
 import { MapScreen } from "../screens/MapScreen";
 import { HomeScreen } from "../screens/HomeScreen";
-import { Button } from "react-native";
 import { SCREENS } from "./router.constants";
+import { Logout } from "../components/Logout";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -42,10 +42,6 @@ export const useRouter = (isLoggedIn) => {
           null,
         ],
       }}
-      // tabBarOptions={{
-      //   activeTintColor: "red",
-      //   // inactiveTintColor: "lightgray",
-      // }}
     >
       {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
       <Tab.Screen
@@ -56,12 +52,13 @@ export const useRouter = (isLoggedIn) => {
           headerTitle: "",
           headerTitleStyle: {},
           headerRight: ({ color, size }) => (
-            <MaterialIcons
-              name="logout"
-              color={"red"}
-              size={26}
-              style={{ marginRight: 20 }}
-            />
+            <Logout />
+            // <MaterialIcons
+            //   name="logout"
+            //   color={"red"}
+            //   size={26}
+            //   style={{ marginRight: 20 }}
+            // />
           ),
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (

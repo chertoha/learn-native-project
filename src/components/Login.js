@@ -7,9 +7,12 @@ import { PasswordField } from "./PasswordField";
 import { commonStyles } from "../styles/common";
 import { useNavigation } from "@react-navigation/native";
 import { SCREENS } from "../router/router.constants";
+import { setAuth } from "../redux/auth/slice";
+import { useDispatch } from "react-redux";
 
 export const Login = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +27,8 @@ export const Login = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
     console.log(values);
     closeKeyboard();
     clearFields();
+
+    dispatch(setAuth(true));
   };
 
   return (

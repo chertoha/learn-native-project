@@ -3,6 +3,8 @@ import MyApp from "./src/MyApp";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { View } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,11 +29,13 @@ export default function App() {
   }
 
   return (
-    <View
-      style={{ flex: 1, backgroundColor: "#fff" }}
-      onLayout={onLayoutRootView}
-    >
-      <MyApp />
-    </View>
+    <Provider store={store}>
+      <View
+        style={{ flex: 1, backgroundColor: "#fff" }}
+        onLayout={onLayoutRootView}
+      >
+        <MyApp />
+      </View>
+    </Provider>
   );
 }
