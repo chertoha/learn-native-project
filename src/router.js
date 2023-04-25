@@ -1,3 +1,6 @@
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RegistrationScreen } from "./screens/RegistrationScreen";
@@ -9,6 +12,7 @@ import { CommentsScreen } from "./screens/CommentsScreen";
 import { ProfileScreen } from "./screens/ProfileScreen";
 import { MapScreen } from "./screens/MapScreen";
 import { HomeScreen } from "./screens/HomeScreen";
+import { Button } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,13 +31,59 @@ export const useRouter = (isLoggedIn) => {
   }
 
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Posts" component={PostsScreen} />
-      <Tab.Screen name="CreatePosts" component={CreatePostsScreen} />
-      <Tab.Screen name="Comments" component={CommentsScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Map" component={MapScreen} />
+    <Tab.Navigator
+      screenOptions={{ headerShown: false }}
+      tabBarOptions={{
+        activeTintColor: "red",
+        // inactiveTintColor: "lightgray",
+      }}
+    >
+      {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
+      <Tab.Screen
+        name="Posts"
+        component={PostsScreen}
+        options={{
+          headerShown: true,
+          headerTitle: "",
+          headerTitleStyle: {},
+          headerRight: ({ color, size }) => (
+            <MaterialIcons
+              name="logout"
+              color={"red"}
+              size={26}
+              style={{ marginRight: 20 }}
+            />
+          ),
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="CreatePosts"
+        component={CreatePostsScreen}
+        options={{
+          // tabBarLabel: "Create posts",
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="add-to-list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          // tabBarLabel: "Profile",
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="profile" color={color} size={size} />
+          ),
+        }}
+      />
+      {/* <Tab.Screen name="Comments" component={CommentsScreen} /> */}
+      {/* <Tab.Screen name="Map" component={MapScreen} /> */}
     </Tab.Navigator>
   );
 };
