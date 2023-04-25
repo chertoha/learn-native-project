@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { EmailField } from "../../components/EmailField";
-import { FormLogRegLink } from "../../components/FormLogRegLink";
-import { FormSubmitButton } from "../../components/FormSubmitButton";
-import { PasswordField } from "../../components/PasswordField";
-import { TextInputField } from "../../components/TextInputField";
-import { commonStyles } from "../../styles/common";
+import { EmailField } from "./EmailField";
+import { FormLogRegLink } from "./FormLogRegLink";
+import { FormSubmitButton } from "./FormSubmitButton";
+import { PasswordField } from "./PasswordField";
+import { TextInputField } from "./TextInputField";
+import { commonStyles } from "../styles/common";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../router/router.constants";
+import { setAuth } from "../redux/auth/slice";
+import { useDispatch } from "react-redux";
 
-export const RegistrationScreen = ({
-  onInputFocus,
-  isKeyboardOpen,
-  closeKeyboard,
-}) => {
+export const Register = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,6 +52,8 @@ export const RegistrationScreen = ({
     console.log(values);
     closeKeyboard();
     clearFields();
+
+    dispatch(setAuth(true));
   };
 
   return (
@@ -119,7 +124,13 @@ export const RegistrationScreen = ({
           onPress={onSubmitHandler}
         />
 
-        <FormLogRegLink>Уже есть аккаунт? Войти</FormLogRegLink>
+        <FormLogRegLink
+          onPress={() => {
+            navigation.navigate(SCREENS.LOGIN);
+          }}
+        >
+          Уже есть аккаунт? Войти
+        </FormLogRegLink>
       </View>
     </View>
   );

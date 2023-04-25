@@ -1,30 +1,19 @@
 import { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
-import { EmailField } from "../../components/EmailField";
-import { FormLogRegLink } from "../../components/FormLogRegLink";
-import { FormSubmitButton } from "../../components/FormSubmitButton";
-import { PasswordField } from "../../components/PasswordField";
-import { commonStyles } from "../../styles/common";
+import { View, Text, StyleSheet } from "react-native";
+import { EmailField } from "./EmailField";
+import { FormLogRegLink } from "./FormLogRegLink";
+import { FormSubmitButton } from "./FormSubmitButton";
+import { PasswordField } from "./PasswordField";
+import { commonStyles } from "../styles/common";
+import { useNavigation } from "@react-navigation/native";
+import { SCREENS } from "../router/router.constants";
+import { setAuth } from "../redux/auth/slice";
+import { useDispatch } from "react-redux";
 
-const initialState = {
-  email: "",
-  password: "",
-};
+export const Login = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-export const LoginScreen = ({
-  onInputFocus,
-  isKeyboardOpen,
-  closeKeyboard,
-}) => {
-  // const [state, setState] = useState(initialState);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,6 +27,8 @@ export const LoginScreen = ({
     console.log(values);
     closeKeyboard();
     clearFields();
+
+    dispatch(setAuth(true));
   };
 
   return (
@@ -66,7 +57,13 @@ export const LoginScreen = ({
 
         <FormSubmitButton title="Войти" onPress={onSubmitHandler} />
 
-        <FormLogRegLink>Нет аккаунта? Зарегистрироваться</FormLogRegLink>
+        <FormLogRegLink
+          onPress={() => {
+            navigation.navigate(SCREENS.REGISTRATION);
+          }}
+        >
+          Нет аккаунта? Зарегистрироваться
+        </FormLogRegLink>
       </View>
     </View>
   );
