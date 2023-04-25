@@ -3,16 +3,16 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { RegistrationScreen } from "./screens/RegistrationScreen";
-import { LoginScreen } from "./screens/LoginScreen";
-import { SCREENS } from "./MyApp";
-import { PostsScreen } from "./screens/PostsScreen";
-import { CreatePostsScreen } from "./screens/CreatePostsScreen";
-import { CommentsScreen } from "./screens/CommentsScreen";
-import { ProfileScreen } from "./screens/ProfileScreen";
-import { MapScreen } from "./screens/MapScreen";
-import { HomeScreen } from "./screens/HomeScreen";
+import { RegistrationScreen } from "../screens/RegistrationScreen";
+import { LoginScreen } from "../screens/LoginScreen";
+import { PostsScreen } from "../screens/PostsScreen";
+import { CreatePostsScreen } from "../screens/CreatePostsScreen";
+import { CommentsScreen } from "../screens/CommentsScreen";
+import { ProfileScreen } from "../screens/ProfileScreen";
+import { MapScreen } from "../screens/MapScreen";
+import { HomeScreen } from "../screens/HomeScreen";
 import { Button } from "react-native";
+import { SCREENS } from "./router.constants";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,11 +32,20 @@ export const useRouter = (isLoggedIn) => {
 
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: false }}
-      tabBarOptions={{
-        activeTintColor: "red",
-        // inactiveTintColor: "lightgray",
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "red",
+        tabBarStyle: [
+          {
+            display: "flex",
+          },
+          null,
+        ],
       }}
+      // tabBarOptions={{
+      //   activeTintColor: "red",
+      //   // inactiveTintColor: "lightgray",
+      // }}
     >
       {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
       <Tab.Screen

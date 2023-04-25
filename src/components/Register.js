@@ -9,7 +9,7 @@ import { commonStyles } from "../styles/common";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
-import { SCREENS } from "../MyApp";
+import { SCREENS } from "../router/router.constants";
 
 export const Register = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
   const navigation = useNavigation();

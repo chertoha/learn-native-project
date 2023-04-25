@@ -6,7 +6,7 @@ import { FormSubmitButton } from "./FormSubmitButton";
 import { PasswordField } from "./PasswordField";
 import { commonStyles } from "../styles/common";
 import { useNavigation } from "@react-navigation/native";
-import { SCREENS } from "../MyApp";
+import { SCREENS } from "../router/router.constants";
 
 export const Login = ({ onInputFocus, isKeyboardOpen, closeKeyboard }) => {
   const navigation = useNavigation();
