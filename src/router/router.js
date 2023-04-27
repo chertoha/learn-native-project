@@ -70,6 +70,8 @@ export const useRouter = (isLoggedIn) => {
         name="CreatePosts"
         component={CreatePostsScreen}
         options={{
+          headerShown: true,
+          title: "Создать публикацию",
           // tabBarLabel: "Create posts",
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => (
